@@ -61,3 +61,32 @@ while true; do
     sleep 1
 done
 ```
+
+
+## Bash: Add Timestamps to the Logfiles 
+Adds timestamp to each line in log file, useful for realtime monitoring.
+
+```bash
+#!/bin/bash
+
+# Usage: ./log_timestamper.sh /path/to/input.log /path/to/output.log
+
+infile="$1"
+outfile="$2"
+
+if [[ -z "$infile" || -z "$outfile" ]]; then
+    echo "Usage: $0 <input_log_file> <output_log_file>"
+    exit 1
+fi
+
+tail -f "$infile" | awk '{ 
+    print strftime("[%Y-%m-%d %H:%M:%S]"), $0; 
+    fflush(); 
+}' >> "$outfile"
+```
+
+### Usage
+```
+chmod +x log_timestamper.sh
+./log_timestamper.sh /var/log/mylogfile ~/mylogfile_with_timestamp
+```
