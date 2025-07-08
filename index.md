@@ -1,3 +1,12 @@
+---
+layout: default
+title: Home
+---
+
+# Welcome to Snippet Library
+
+Here are some useful code snippets and scripts...
+
 ##  PowerShell:  Ping command  with Timestamps
 
 ``` powershell
