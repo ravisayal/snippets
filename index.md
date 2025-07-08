@@ -1,4 +1,4 @@
-##  PowerShell: Better Ping command  with Timestamps
+##  PowerShell:  Ping command  with Timestamps
 
 ``` powershell
 # Define the IP address or hostname to ping
@@ -26,4 +26,38 @@ while ($true) {
         Out-File -Append -FilePath $logFile
     Start-Sleep -Seconds 1
 }
+```
+
+## Bash: Ping command  with Timestamps
+```bash
+#!/bin/bash
+
+# Define the IP address or hostname to ping
+target="8.8.8.8"
+
+# Loop forever and print ping replies with timestamps
+while true; do
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $(ping -c 1 $target)"
+    sleep 1
+done
+```
+
+## Bash: Ping with Timestamps, Filtered & Logged to File
+```bash
+#!/bin/bash
+
+# Set the IP address or hostname to ping
+target="8.8.8.8"
+
+# Set the output log file path
+log_file="$HOME/ping_logfile.txt"
+
+# Loop forever and log successful ping replies with timestamps
+while true; do
+    reply=$(ping -c 1 $target | grep 'bytes from')
+    if [ -n "$reply" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - $reply" >> "$log_file"
+    fi
+    sleep 1
+done
 ```
